@@ -1,4 +1,11 @@
-<svg width="150" height="50" viewBox="0 0 150 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="1" y="1" width="148" height="48" rx="1" stroke="white" stroke-width="2"/>
-<path d="M86 23.7778H76.2222V14H73.7778V23.7778H64V26.2222H73.7778V36H76.2222V26.2222H86V23.7778Z" fill="white"/>
+<svg width="150" height="50" xmlns="http://www.w3.org/2000/svg">
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="60" width="60" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <path id="svg_2" fill="white" d="m86,23.7778l-9.7778,0l0,-9.7778l-2.4444,0l0,9.7778l-9.7778,0l0,2.4444l9.7778,0l0,9.7778l2.4444,0l0,-9.7778l9.7778,0l0,-2.4444z"/>
+ </g>
 </svg>
