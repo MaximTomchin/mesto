@@ -1,0 +1,32 @@
+.popup__field {
+    margin: 30px 36px 0;
+    width: 358px;
+    min-height: 27.26px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;    
+    border: none;
+    border-bottom: 1px solid #000000;
+}
+
+.popup__field:first-of-type {
+    margin: 54px 36px 0;
+}
+
+.popup__field::placeholder {
+    color: #000000;
+}
+
+@media screen and (max-width: 767px) {
+    .popup__field {
+        margin: 30px 22px 0;
+        width: 238px; 
+        min-height: 27px;       
+      }
+
+      .popup__field:first-of-type {
+        margin: 75px 22px 0;
+    }
+}   

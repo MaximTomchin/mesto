@@ -11,7 +11,7 @@
         <div class="page">
             
             <header class="header">
-                <img src="./images/logo.png" class="header__logo">                
+                <img src="./images/logo.png" class="header__logo" alt="Место-Россия">                
             </header>
 
             <main class="content">
@@ -23,10 +23,10 @@
                               <h1 class="profile__name">Жак-Ив Кусто</h1>
                               <p class="profile__description">Исследователь океана</p>
                            </div>                    
-                           <img src="./images/edit-button.svg" class="profile__edit-button">
+                           <img src="./images/edit-button.svg" class="profile__edit-button" alt="иконка открытия редактора профиля">
                         </div>
                     </figure>
-                    <img src="./images/add-button.svg" class="profile__add-button">
+                   <img src="./images/add-button.svg" class="profile__add-button" alt="иконка открытия редактора картинок">
                 </section>  
                 
                 
@@ -82,6 +82,16 @@
                 </section>
 
             </main>
+
+            <form class="popup">
+                <fieldset class="popup__container">
+                    <img src="./images/close-icon.svg" class="popup__close-image" alt="иконка закрытия">
+                    <h2 class="popup__title">Редактировать профиль</h2>
+                    <input class="popup__field" type="text" name="name" placeholder="Жак-Ив Кусто">
+                    <input class="popup__field" type="text" name="about" placeholder="Исследователь океана">
+                    <button class="popup__button">Сохранить</button>                                    
+                </fieldset>
+            </form>
 
             <footer class="footer">
                 <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
