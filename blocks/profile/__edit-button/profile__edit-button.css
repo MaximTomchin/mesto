@@ -1,9 +1,13 @@
 .profile__edit-button {
-    margin: 37px 0 0 17px;
+    display: flex;    
+    padding: 0;
+    background: none;     
+    border: none;   
+    margin: 36px 0 0 22px;
     max-width: 24px;
     max-height: 24px;    
-    box-sizing: border-box;
-    transition: opacity .3s ease;
+    box-sizing: border-box;  
+    transition: opacity .3s ease;    
 }
 
 .profile__edit-button:hover {

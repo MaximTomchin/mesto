@@ -1,5 +1,9 @@
 .profile__description {
-    font-family: Inter;
+    margin: 2px 0 0;
+    max-width: 295px;
+    text-overflow: ellipsis; 
+    white-space: nowrap; 
+    overflow: hidden;
     font-style: normal;
     font-weight: normal;
     font-size: 18px;

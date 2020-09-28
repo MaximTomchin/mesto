@@ -1,9 +1,11 @@
 .footer {
       margin: 66px 199px 60px;
+      flex-shrink: 0;
+      font-family: 'Inter', Arial, sans-serif;
     }
 
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1054px) {
     .footer {
         margin: 48px 19px 36px;
       }
