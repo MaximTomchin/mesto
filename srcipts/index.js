@@ -8,15 +8,19 @@ let profile = document.querySelector('.profile__name');
 let description = document.querySelector('.profile__description');
 
 let togglePopup = () => {
+if (popup.classList.contains('popup_opened') === false) {
     nameInput.value = profile.textContent;
     jobInput.value = description.textContent;
     popup.classList.toggle('popup_opened');
+} else {
+    popup.classList.toggle('popup_opened');
+}
 }
 
-let formSubmitHandler  = (evt) => {
+function formSubmitHandler(evt) {
     evt.preventDefault();
-    profile.textContent = nameInput.value;     
-    description.textContent = jobInput.value; 
+    profile.textContent = nameInput.value;
+    description.textContent = jobInput.value;
     popup.classList.toggle('popup_opened');
 }
 
