@@ -24,9 +24,9 @@
         margin: 30px 22px 0;
         width: 238px; 
         padding: 0 0 13px;        
-      }
+    }
 
-      .popup__field:first-of-type {
+    .popup__field:first-of-type {
         margin: 75px 22px 0;    
         padding: 0 0 13px;  
     }

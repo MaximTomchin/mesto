@@ -29,7 +29,6 @@ const buttonOpenPopup = document.querySelector('.profile__edit-button');
 const buttonOpenPopupAdd = document.querySelector('.profile__add-button');
 const buttonClosePopup = document.querySelector('.popup__close-button');
 const buttonClosePopupAdd = document.querySelector('.popup__close-button_type_add');
-const resetButton = document.querySelector('.element__button-reset');
 const popup = document.querySelector('.popup');
 const popupAdd = document.querySelector('.popup_type_add');
 const formElement = document.querySelector('.popup__container');
@@ -48,92 +47,75 @@ const popupPicture = document.querySelector('.popup__image');
 const popupCaption = document.querySelector('.popup__caption');
 
 
-
 const togglePopup = () => {
-    if (!popup.classList.contains('popup_opened')) {
+        popup.classList.toggle('popup_opened');
         nameInput.value = profile.textContent;
-        jobInput.value = description.textContent;
-        popup.classList.toggle('popup_opened');
-    } else {
-        popup.classList.toggle('popup_opened');
-    }
-}
-
-
-const togglePopupAdd = () => {
-    if (!popupAdd.classList.contains('popup_opened')) {
-       popupAdd.classList.toggle('popup_opened');
-    } else {
-       popupAdd.classList.toggle('popup_opened');
-    }
-    formElementAdd.addEventListener('submit', handleCardFormSubmit); 
-}
-
+        jobInput.value = description.textContent; 
+};
 
 const  handleFormSubmit = (evt) => {
     evt.preventDefault();
     profile.textContent = nameInput.value;
     description.textContent = jobInput.value;
     popup.classList.toggle('popup_opened');
-}
-
-
-const getItems = (data) => {
-    const card = template.content.cloneNode(true);
-    card.querySelector('.element__title').textContent = data.title;
-    card.querySelector('.element__image').alt = data.title;
-    card.querySelector('.element__image').src = data.link;   
-   
-    const resetButton = card.querySelector('.element__button-reset');
-    card.querySelector('.element__button-like').addEventListener('click',handleLike);
-    card.querySelector('.element__image').addEventListener('click',() => togglePopupImage(data));
-
-    resetButton.addEventListener('click',handleRemove);
-
-    return card;
 };
 
-const renderList = () => {
-    const items = initialCards.map(element => getItems(element));
-    cards.append(...items);
+const handleRemove = (evt) => {
+    evt.target.closest('.element').remove();
 };
-
-
-const handleCardFormSubmit = (evt) => {
-    evt.preventDefault();
-    const item = getItems({
-        title: titleInput.value,
-        link: linkInput.value
-         });
-    cards.prepend(item);
-    popupAdd.classList.toggle('popup_opened');
-    titleInput.value = "";
-    linkInput.value = "";
-}
-
 
 const togglePopupImage  = (data) => {
     popupPicture.src = data.link;
     popupPicture.alt = data.title;
     popupCaption.textContent = data.title;
     popupImage.classList.toggle('popup_opened');
-}
-
-
-const closePopupImage = () => {
-    popupImage.classList.remove('popup_opened');
-}
-
+};
 
 const handleLike = (evt) => {
     evt.target.classList.toggle('element__button-like_active');
 };
 
+const getItem = (data) => {
+    const card = template.content.cloneNode(true);
+    const elementImage = card.querySelector('.element__image');
+    card.querySelector('.element__title').textContent = data.title;
+    elementImage.alt = data.title;
+    elementImage.src = data.link;   
+   
+    const resetButton = card.querySelector('.element__button-reset');
+    card.querySelector('.element__button-like').addEventListener('click',handleLike);
+    elementImage.addEventListener('click',() => togglePopupImage(data));
 
-const handleRemove = (evt) => {
-    evt.target.closest('.element').remove();
+    resetButton.addEventListener('click',handleRemove);
+
+    return card;
 };
 
+const handleCardFormSubmit = (evt) => {
+    evt.preventDefault();
+    const item = getItem({
+        title: titleInput.value,
+        link: linkInput.value
+        });
+    cards.prepend(item);
+    popupAdd.classList.toggle('popup_opened');
+    titleInput.value = "";
+    linkInput.value = "";
+};
+
+const togglePopupAdd = () => {    
+       popupAdd.classList.toggle('popup_opened');
+       formElementAdd.addEventListener('submit', handleCardFormSubmit); 
+};
+
+const renderList = () => {
+    const items = initialCards.map(getItem);
+    cards.append(...items);
+};
+
+const closePopupImage = () => {
+    popupImage.classList.remove('popup_opened');
+};
 
 renderList();
 
