@@ -1,6 +1,7 @@
 .element {
     margin: 0;
     padding: 0;
+    position: relative;
     background: #FFFFFF;
     border-radius: 10px;
     color: #000000;

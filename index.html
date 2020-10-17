@@ -4,7 +4,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Место</title>
-        <link rel="stylesheet" href="./pages/index.css">        
+        <link rel="stylesheet" href="./pages/index.css"> 
+        <script src="./srcipts/index.js" defer></script>
     </head>
 
     <body class="root">
@@ -23,62 +24,14 @@
                               <h1 class="profile__name">Жак-Ив Кусто</h1>
                               <p class="profile__description">Исследователь океана</p>
                            </div>                    
-                          <button class="profile__edit-button" type="button" aria-label="Edit"><img src="./images/edit-button.svg" class="profile__button-image" alt="иконка открытия редактора профиля"></button>
+                          <button class="profile__edit-button" type="button" aria-label="Edit"></button>
                         </div>
                     </figure>
-                    <button class="profile__add-button" type="button" area-label="Add"><img src="./images/add-button.svg" class="profile__button-image" alt="иконка открытия редактора картинок"></button>
+                    <button class="profile__add-button" type="button" area-label="Add"></button>
                 </section>  
                 
                 
                 <section class="elements">
-                    <figure class="element">
-                        <img src="./images/tsarskoe.jpg" class="element__image" alt="Екатерининский дворец в Царском селе">
-                        <div class="element__info">
-                            <h2 class="element__title">Царское село</h2>
-                            <button class="element__button" type="button" aria-label="Like"><img src="./images/like.svg" class="element__like" alt="иконка лайка" ></button>
-                        </div>
-                    </figure>
-
-                    <figure class="element">
-                        <img src="./images/peterhof.jpg" class="element__image" alt="Перспектива Морского канала в Нижнем парке Петергофа">
-                        <div class="element__info">
-                            <h2 class="element__title">Петергоф</h2>
-                            <button class="element__button" type="button" aria-label="Like"><img src="./images/like.svg" class="element__like" alt="иконка лайка" ></button>
-                        </div>
-                    </figure>
-
-                    <figure class="element">
-                        <img src="./images/gatchina.jpg" class="element__image" alt="Вид Большого Гатчинского дворца со стороны Собственного сада">
-                        <div class="element__info">
-                            <h2 class="element__title">Гатчина</h2>
-                            <button class="element__button" type="button" aria-label="Like"><img src="./images/like.svg" class="element__like" alt="иконка лайка" ></button>
-                        </div>
-                    </figure>
-
-                    <figure class="element">
-                        <img src="./images/oranienbaum.jpg" class="element__image" alt="Китайский дворец в Верхнем парке Ораниенбаума">
-                        <div class="element__info">
-                            <h2 class="element__title">Ораниенбаум</h2>
-                            <button class="element__button" type="button" aria-label="Like"><img src="./images/like.svg" class="element__like" alt="иконка лайка" ></button>
-                        </div>
-                    </figure>
-
-                    <figure class="element">
-                        <img src="./images/pavlovsk.jpg" class="element__image" alt="Мостик через реку Славянку в Павловске">
-                        <div class="element__info">
-                            <h2 class="element__title">Павловск</h2>
-                            <button class="element__button" type="button" aria-label="Like"><img src="./images/like.svg" class="element__like" alt="иконка лайка" ></button>
-                        </div>
-                    </figure>
-
-                    <figure class="element">
-                        <img src="./images/karelsky.jpg" class="element__image" alt="церковь XIX века близ посёлка Горьковское">
-                        <div class="element__info">
-                            <h2 class="element__title">Карельский перешеек</h2>
-                            <button class="element__button" type="button" aria-label="Like"><img src="./images/like.svg" class="element__like" alt="иконка лайка" ></button>
-                        </div>
-                    </figure>
-
                 </section>
 
             </main>
@@ -90,15 +43,44 @@
             
             <div class="popup">
                 <form class="popup__container" name="form">
-                    <button class= "popup__close-button" type="reset" aria-label="Close"><img src="./images/close-icon.svg" class="popup__close-image" alt="иконка закрытия"></button>
+                    <button class= "popup__close-button" type="reset" aria-label="Close"></button>
                     <h2 class="popup__title">Редактировать профиль</h2>
                     <input class="popup__field" type="text" name="name" value="Жак-Ив Кусто" placeholder="Имя" required>
                     <input class="popup__field" type="text" name="about" value="Исследователь океана" placeholder="Описание" required>
                     <button class="popup__button">Сохранить</button>                                    
                 </form>
             </div>
-        </div>   
-        <script src="./srcipts/index.js"></script>     
+
+            <div class="popup popup_type_add">
+                <form class="popup__container popup__container_type_add" name="form">
+                    <button class= "popup__close-button popup__close-button_type_add" type="reset" aria-label="Close"></button>
+                    <h2 class="popup__title popup__title_type_add">Новое место</h2>
+                    <input class="popup__field popup__field_type_add" type="text" name="title" value="" placeholder="Название" required>
+                    <input class="popup__field popup__field_type_add" type="text" name="link" value="" placeholder="Ссылка на картинку" required>
+                    <button class="popup__button popup__button_type_add">Создать</button>                                    
+                </form>
+            </div> 
+
+            <div class="popup popup_type_image">
+                <figure class="popup__image-block">
+                    <button class= "popup__close-button popup__close-button_type_image" type="reset" aria-label="Close"></button>
+                    <img src="" class="popup__image" alt="">
+                    <p class="popup__caption"></p>
+                </figure>
+            </div> 
+        </div> 
+        
+        <template class="template">
+            <figure class="element">
+                <button class="element__button-reset" type="reset" aria-label="Delete"></button>
+               <div class="element__image-box"><img src="#" class="element__image" alt="#"></div>
+                <div class="element__info">
+                   <h2 class="element__title"></h2>
+                    <button class="element__button-like" type="button" aria-label="Like"></button>
+                </div>
+            </figure>
+        </template>
+             
     </body>
 
 </html>
