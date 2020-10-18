@@ -48,9 +48,9 @@ const popupCaption = document.querySelector('.popup__caption');
 
 
 const togglePopup = () => {
-        popup.classList.toggle('popup_opened');
-        nameInput.value = profile.textContent;
-        jobInput.value = description.textContent; 
+    popup.classList.toggle('popup_opened');
+    nameInput.value = profile.textContent;
+    jobInput.value = description.textContent; 
 };
 
 const  handleFormSubmit = (evt) => {
@@ -96,7 +96,7 @@ const handleCardFormSubmit = (evt) => {
     const item = getItem({
         title: titleInput.value,
         link: linkInput.value
-        });
+    });
     cards.prepend(item);
     popupAdd.classList.toggle('popup_opened');
     titleInput.value = "";
@@ -104,8 +104,8 @@ const handleCardFormSubmit = (evt) => {
 };
 
 const togglePopupAdd = () => {    
-       popupAdd.classList.toggle('popup_opened');
-       formElementAdd.addEventListener('submit', handleCardFormSubmit); 
+    popupAdd.classList.toggle('popup_opened');
+    formElementAdd.addEventListener('submit', handleCardFormSubmit); 
 };
 
 const renderList = () => {
