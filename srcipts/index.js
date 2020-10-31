@@ -31,13 +31,14 @@ const buttonClosePopup = document.querySelector('.popup__close-button');
 const buttonClosePopupAdd = document.querySelector('.popup__close-button_type_add');
 const buttonSavePopupAdd = document.querySelector('.popup__button_type_add');
 const popup = document.querySelector('.popup');
+const popupEdit = document.querySelector('.popup_type_edit');
 const popupAdd = document.querySelector('.popup_type_add');
 const formElement = document.querySelector('.popup__container');
 const formElementAdd = document.querySelector('.popup__container_type_add');
-const nameInput = document.querySelector('.popup__field[name="name"]');
-const jobInput = document.querySelector('.popup__field[name="about"]'); 
-const titleInput = document.querySelector('.popup__field[name="title"]');
-const linkInput = document.querySelector('.popup__field[name="link"]'); 
+const nameInput = popup.querySelector('.popup__field[name="name"]');
+const jobInput = popup.querySelector('.popup__field[name="about"]'); 
+const titleInput = popupAdd.querySelector('.popup__field[name="title"]');
+const linkInput = popupAdd.querySelector('.popup__field[name="link"]'); 
 const profile = document.querySelector('.profile__name');
 const description = document.querySelector('.profile__description');
 const template = document.querySelector('.template');
@@ -51,29 +52,35 @@ const overlayAdd = document.querySelector('.popup__overlay_type_add');
 const overlayImage = document.querySelector('.popup__overlay_type_image');
 
 
-const closePopup = () => {
-    popup.classList.remove('popup_opened');
-    document.removeEventListener('keydown', closePopupByESC);
-};
-
 const closePopupByESC = (evt) => {
     if (evt.key === 'Escape') {
-       closePopup ();
+        togglePopup(document.querySelector('.popup_opened'));
     };
 };
 
-const togglePopup = () => {
+const togglePopup = (popup) => {
     popup.classList.toggle('popup_opened');
+
+    if (popup.classList.contains('popup_opened')) {
+        document.addEventListener('keydown', closePopupByESC);
+    } else {
+       document.removeEventListener('keydown', closePopupByESC);
+    };
+   
+    disableButtonAdd ();
+};
+
+const togglePopupEdit = () => {
     nameInput.value = profile.textContent;
     jobInput.value = description.textContent; 
-    document.addEventListener('keydown', closePopupByESC);
-};
+    togglePopup (popupEdit);
+}
 
 const  handleFormSubmit = (evt) => {
     evt.preventDefault();
     profile.textContent = nameInput.value;
     description.textContent = jobInput.value;
-    popup.classList.toggle('popup_opened');
+   togglePopup(popup);
 };
 
 const handleRemove = (evt) => {
@@ -81,23 +88,11 @@ const handleRemove = (evt) => {
 };
 
 
-const closePopupImage = () => {
-   popupImage.classList.remove('popup_opened');
-   document.removeEventListener('keydown', closePopupImageByESC);
-};
-
-const closePopupImageByESC = (evt) => {
-  if (evt.key === 'Escape') {
-     closePopupImage ();
-   };
-};
-
 const togglePopupImage  = (data) => {
     popupPicture.src = data.link;
     popupPicture.alt = data.title;
     popupCaption.textContent = data.title;
-    popupImage.classList.toggle('popup_opened');
-    document.addEventListener('keydown', closePopupImageByESC);
+    togglePopup (popupImage);
 };
 
 const handleLike = (evt) => {
@@ -127,7 +122,7 @@ const handleCardFormSubmit = (evt) => {
         link: linkInput.value
     });
     cards.prepend(item);
-    popupAdd.classList.toggle('popup_opened');
+    togglePopup(popupAdd);
     titleInput.value = "";
     linkInput.value = "";
 };
@@ -137,22 +132,10 @@ const disableButtonAdd = () => {
     buttonSavePopupAdd.disabled = true;
 };
 
-const closePopupAdd = () => {
-   popupAdd.classList.remove('popup_opened');
-   document.removeEventListener('keydown', closePopupAddByESC);
-};
-
-const closePopupAddByESC = (evt) => {
-   if (evt.key === 'Escape') {
-       closePopupAdd ();
-   };
-};
 
 const togglePopupAdd = () => {    
-    popupAdd.classList.toggle('popup_opened');
+    topplePopup(popupAdd);
     formElementAdd.addEventListener('submit', handleCardFormSubmit); 
-    document.addEventListener('keydown', closePopupAddByESC);
-    disableButtonAdd ();
 };
 
 const renderList = () => {
@@ -163,14 +146,13 @@ const renderList = () => {
 renderList();
 
 
-buttonOpenPopup.addEventListener('click',togglePopup);
-buttonOpenPopupAdd.addEventListener('click',togglePopupAdd);
-buttonClosePopup.addEventListener('click',togglePopup);
-buttonClosePopupAdd.addEventListener('click',togglePopupAdd);
+buttonOpenPopup.addEventListener('click',() => togglePopup(popupEdit));
+buttonOpenPopupAdd.addEventListener('click',() => togglePopup(popupAdd));
+buttonClosePopup.addEventListener('click',() => togglePopup(popupEdit));
+buttonClosePopupAdd.addEventListener('click',() => togglePopup(popupAdd));
 formElement.addEventListener('submit',handleFormSubmit); 
 formElementAdd.addEventListener('submit',handleCardFormSubmit);
-buttonClosePopupImage.addEventListener('click',closePopupImage);
-overlay.addEventListener('click', closePopup);
-overlayAdd.addEventListener('click', closePopupAdd);
-overlayImage.addEventListener('click', closePopupImage);
-
+buttonClosePopupImage.addEventListener('click',() => togglePopup(popupImage));
+overlay.addEventListener('click', () => togglePopup(popupEdit));
+overlayAdd.addEventListener('click', () => togglePopup(popupAdd));
+overlayImage.addEventListener('click', () => togglePopup(popupImage));
