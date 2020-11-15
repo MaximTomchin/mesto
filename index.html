@@ -5,8 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Место</title>
         <link rel="stylesheet" href="./pages/index.css"> 
-        <script src="./srcipts/index.js" defer></script>
-        <script src="./srcipts/validate.js" defer></script>
+        <script type="module" src="./srcipts/index.js" defer></script>
+        
     </head>
 
     <body class="root">
@@ -44,7 +44,7 @@
             
             <div class="popup popup_type_edit">
                 <div class="popup__overlay"></div>
-                <form class="popup__container" name="edit-profile">
+                <form class="popup__container popup__container_type_edit" name="edit-profile">
                     <button class= "popup__close-button" type="reset" aria-label="Close"></button>
                     <h2 class="popup__title">Редактировать профиль</h2>
                     <input class="popup__field" id="user-name" type="text" name="name" value="Жак-Ив Кусто" placeholder="Имя" minlength="2" maxlength="40" required>
@@ -78,10 +78,10 @@
             </div> 
         </div> 
         
-        <template class="template">
+        <template class="template" id="card-template">
             <figure class="element">
                 <button class="element__button-reset" type="reset" aria-label="Delete"></button>
-               <div class="element__image-box"><img src="#" class="element__image" alt="#"></div>
+               <div class="element__image-box"><img src="" class="element__image" alt=""></div>
                 <div class="element__info">
                    <h2 class="element__title"></h2>
                     <button class="element__button-like" type="button" aria-label="Like"></button>
