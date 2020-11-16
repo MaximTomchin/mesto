@@ -14,14 +14,13 @@ export class FormValidator {
     _showError = (form, input) => {
         const errorElement = document.querySelector(`#${input.id}-error`);
         errorElement.textContent = input.validationMessage;
-        input.classList.add('popup__field_invalid');
-       
+        input.classList.add(this._errorClass);
     };  
     
 
     _hideError = (form, input) => {
         const errorElement = document.querySelector(`#${input.id}-error`);
-        input.classList.remove('popup__field_invalid');
+        input.classList.remove(this._errorClass);
         errorElement.textContent = '';
     };
     
@@ -29,7 +28,7 @@ export class FormValidator {
     _checkInputValidity = (form, input) => {
         input.setCustomValidity('');
 
-        if (this._popupForm.checkValidity()) {
+        if (input.checkValidity()) {
             this._hideError(this._popupForm.querySelector(this._inputSelector), input);
         } else {
             this._showError(this._popupForm.querySelector(this._inputSelector), input);
@@ -39,18 +38,18 @@ export class FormValidator {
 
     _toggleButtonState = (input, buttonElement) => {
         if (!this._popupForm.checkValidity()) {
-            buttonElement.classList.add('popup__button_invalid');
             buttonElement.disabled = true;
+            buttonElement.classList.add(this._inactiveButtonClass);
         } else {
-            buttonElement.classList.remove('popup__button_invalid');
-           buttonElement.disabled = false;
+            buttonElement.disabled = false;
+            buttonElement.classList.remove(this._inactiveButtonClass);
         };
     };
 
 
     _setEventListeners = () => {
-        const inputElements = Array.from(this._popupForm.querySelectorAll('.popup__field')); 
-        const buttonElement = this._popupForm.querySelector('.popup__button');
+        const inputElements = Array.from(this._popupForm.querySelectorAll(this._inputSelector)); 
+        const buttonElement = this._popupForm.querySelector(this._submitButtonSelector);
     
         inputElements.forEach((input) => {
             input.addEventListener('input', (evt) => {
@@ -69,7 +68,7 @@ export class FormValidator {
                 evt.preventDefault();
         });
     
-            this._setEventListeners();
+        this._setEventListeners();
     };
     
 };

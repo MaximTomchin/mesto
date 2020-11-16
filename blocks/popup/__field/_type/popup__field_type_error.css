@@ -1,4 +1,5 @@
-.popup__field_invalid {
+.popup__field_type_error {
+    border-bottom: 1px solid #FF0000;
     font-family: Inter;
     font-style: normal;
     font-weight: normal;

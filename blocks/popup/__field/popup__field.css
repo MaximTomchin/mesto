@@ -16,7 +16,7 @@
 }
 
 .popup__field::placeholder {
-    color: #000000;
+    color: #C4C4C4;
 }
 
 @media screen and (max-width: 767px) {
