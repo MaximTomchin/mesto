@@ -43,7 +43,6 @@
 
             
             <div class="popup popup_type_edit">
-                <div class="popup__overlay"></div>
                 <form class="popup__container popup__container_type_edit" name="edit-profile">
                     <button class= "popup__close-button" type="reset" aria-label="Close"></button>
                     <h2 class="popup__title">Редактировать профиль</h2>
@@ -56,7 +55,6 @@
             </div>
 
             <div class="popup popup_type_add">
-                <div class="popup__overlay popup__overlay_type_add"></div>
                 <form class="popup__container popup__container_type_add" name="add-card">
                     <button class= "popup__close-button popup__close-button_type_add" type="reset" aria-label="Close"></button>
                     <h2 class="popup__title popup__title_type_add">Новое место</h2>
@@ -68,8 +66,7 @@
                 </form>
             </div> 
 
-            <div class="popup popup_type_image overlay">
-                <div class="popup__overlay popup__overlay_type_image"></div>
+            <div class="popup popup_type_image">
                 <figure class="popup__image-block">
                     <button class= "popup__close-button popup__close-button_type_image" type="reset" aria-label="Close"></button>
                     <img src="" class="popup__image" alt="">
@@ -77,6 +74,7 @@
                 </figure>
             </div> 
         </div> 
+        
         
         <template class="template" id="card-template">
             <figure class="element">
