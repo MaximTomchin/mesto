@@ -28,6 +28,7 @@ const errorProfileName = popup.querySelector('.error_type_name');
 const errorProfileAbout = popup.querySelector('.error_type_about');
 const errorCardTitle = popupAdd.querySelector('.error_type_title');
 const errorCardLink = popupAdd.querySelector('.error_type_link');
+const buttonSavePopupAdd = document.querySelector('.popup__button_type_add');
 
 const editForm = new FormValidator (validationParams, popupEditProfile);
 editForm.enableValidation (togglePopup);
@@ -68,8 +69,15 @@ const clearEditProfileFormInputs = () => {
     togglePopup(popup)
 }
 
+const disableButtonAdd = () => {
+    buttonSavePopupAdd.classList.add(validationParams.inactiveButtonClass);
+    buttonSavePopupAdd.disabled = true;
+ };
+
+
 
 const clearCardFormInputs = () => {
+    disableButtonAdd ();
     titleInput.value = "";
     linkInput.value = "";
     titleInput.classList.remove(validationParams.errorClass);
