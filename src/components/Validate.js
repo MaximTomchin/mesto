@@ -11,21 +11,21 @@ export class FormValidator {
     };
 
 
-    _showError = (form, input) => {
+    _showError (form, input) {
         const errorElement = document.querySelector(`#${input.id}-error`);
         errorElement.textContent = input.validationMessage;
         input.classList.add(this._errorClass);
     };  
     
 
-    _hideError = (form, input) => {
+    _hideError (form, input) {
         const errorElement = document.querySelector(`#${input.id}-error`);
         input.classList.remove(this._errorClass);
         errorElement.textContent = '';
     };
     
 
-    _checkInputValidity = (form, input) => {
+    _checkInputValidity (form, input) {
         input.setCustomValidity('');
 
         if (input.checkValidity()) {
@@ -36,7 +36,7 @@ export class FormValidator {
     };
     
 
-    _toggleButtonState = (input, buttonElement) => {
+    _toggleButtonState (input, buttonElement) {
         if (!this._popupForm.checkValidity()) {
             buttonElement.disabled = true;
             buttonElement.classList.add(this._inactiveButtonClass);
@@ -47,7 +47,7 @@ export class FormValidator {
     };
 
 
-    _setEventListeners = () => {
+    _setEventListeners () {
         const inputElements = Array.from(this._popupForm.querySelectorAll(this._inputSelector)); 
         const buttonElement = this._popupForm.querySelector(this._submitButtonSelector);
     
@@ -62,7 +62,7 @@ export class FormValidator {
     };
 
 
-    enableValidation = () => {
+    enableValidation () {
        
         this._popupForm.addEventListener('submit', (evt) => {
                 evt.preventDefault();

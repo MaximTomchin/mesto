@@ -4,8 +4,6 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Место</title>
-        <link rel="stylesheet" href="./pages/index.css"> 
-        <script type="module" src="./srcipts/index.js" defer></script>
         
     </head>
 
@@ -13,13 +11,13 @@
         <div class="page">
             
             <header class="header">
-                <img src="./images/logo.svg" class="header__logo" alt="Место-Россия">                
+                <img src="<%=require('./images/logo.svg')%>" class="header__logo" alt="Место-Россия">                
             </header>
 
             <main class="content">
                 <section class="profile">
                     <figure class="profile__box">
-                       <img src="./images/kusto.jpg" class="profile__avatar" alt="Фотопортрет Жака-Ива Кусто">
+                       <img src="<%=require('./images/kusto.jpg')%>" class="profile__avatar" alt="Фотопортрет Жака-Ива Кусто">
                        <div class="profile__info">
                            <div class="profile__text-block">
                               <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -43,6 +41,7 @@
 
             
             <div class="popup popup_type_edit">
+                <div class="popup__overlay"></div>
                 <form class="popup__container popup__container_type_edit" name="edit-profile">
                     <button class= "popup__close-button" type="reset" aria-label="Close"></button>
                     <h2 class="popup__title">Редактировать профиль</h2>
@@ -55,6 +54,7 @@
             </div>
 
             <div class="popup popup_type_add">
+                <div class="popup__overlay"></div>
                 <form class="popup__container popup__container_type_add" name="add-card">
                     <button class= "popup__close-button popup__close-button_type_add" type="reset" aria-label="Close"></button>
                     <h2 class="popup__title popup__title_type_add">Новое место</h2>
@@ -67,6 +67,7 @@
             </div> 
 
             <div class="popup popup_type_image">
+                <div class="popup__overlay"></div>
                 <figure class="popup__image-block">
                     <button class= "popup__close-button popup__close-button_type_image" type="reset" aria-label="Close"></button>
                     <img src="" class="popup__image" alt="">
