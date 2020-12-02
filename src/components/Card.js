@@ -4,6 +4,11 @@ export class Card {
       this._link = data.link;
       this._cardSelector = cardSelector;
       this._handleCardClick = handleCardClick;
+      this._content = this._getTemplate();
+      this._image = this._content.querySelector('.element__image');
+      this._buttonLike = this._content.querySelector('.element__button-like');
+      this._buttonReset = this._content.querySelector('.element__button-reset');
+      this._titleElement = this._content.querySelector('.element__title');
     }
   
     _getTemplate() {
@@ -21,20 +26,19 @@ export class Card {
     }
 
     _handleLike () {
-      this._content.querySelector('.element__button-like').classList.toggle('element__button-like_active');
+      this._buttonLike.classList.toggle('element__button-like_active');
     }
 
     _setEventListeners() {
-      this._content.querySelector('.element__button-reset').addEventListener('click', () => this._deleteCard());
-      this._content.querySelector('.element__button-like').addEventListener('click', () => this._handleLike());
-      this._content.querySelector ('.element__image').addEventListener('click', () => this._handleCardClick ());
+      this._buttonReset.addEventListener('click', () => this._deleteCard());
+      this._buttonLike.addEventListener('click', () => this._handleLike());
+      this._image.addEventListener('click', () => this._handleCardClick ());
     }
 
     generateCard() {
-      this._content = this._getTemplate();
-      this._content.querySelector('.element__title').textContent = this._title;
-      this._content.querySelector('.element__image').alt= this._title;
-      this._content.querySelector('.element__image').src = this._link;
+      this._titleElement.textContent = this._title;
+      this._image.alt= this._title;
+      this._image.src = this._link;
       this._setEventListeners();
       
       return this._content;

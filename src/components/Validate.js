@@ -8,23 +8,22 @@ export class FormValidator {
        this._inputErrorClass = validationParams.inputErrorClass,
        this._errorClass = validationParams.errorClass,
        this._popupForm = popupForm;
+       this._buttonElement = this._popupForm.querySelector(this._submitButtonSelector);
+       this._inputElements = Array.from(this._popupForm.querySelectorAll(this._inputSelector)); 
     };
 
-
     _showError (form, input) {
-        const errorElement = document.querySelector(`#${input.id}-error`);
-        errorElement.textContent = input.validationMessage;
+        this._errorElement = document.querySelector(`#${input.id}-error`);
+        this._errorElement.textContent = input.validationMessage;
         input.classList.add(this._errorClass);
     };  
     
-
     _hideError (form, input) {
-        const errorElement = document.querySelector(`#${input.id}-error`);
+        this._errorElement = document.querySelector(`#${input.id}-error`);
         input.classList.remove(this._errorClass);
-        errorElement.textContent = '';
+        this._errorElement.textContent = '';
     };
     
-
     _checkInputValidity (form, input) {
         input.setCustomValidity('');
 
@@ -35,40 +34,43 @@ export class FormValidator {
         };
     };
     
-
-    _toggleButtonState (input, buttonElement) {
+    _toggleButtonState () {
         if (!this._popupForm.checkValidity()) {
-            buttonElement.disabled = true;
-            buttonElement.classList.add(this._inactiveButtonClass);
+            this._buttonElement.disabled = true;
+            this._buttonElement.classList.add(this._inactiveButtonClass);
         } else {
-            buttonElement.disabled = false;
-            buttonElement.classList.remove(this._inactiveButtonClass);
+            this._buttonElement.disabled = false;
+            this._buttonElement.classList.remove(this._inactiveButtonClass);
         };
     };
 
 
     _setEventListeners () {
-        const inputElements = Array.from(this._popupForm.querySelectorAll(this._inputSelector)); 
-        const buttonElement = this._popupForm.querySelector(this._submitButtonSelector);
-    
-        inputElements.forEach((input) => {
+        this._inputElements.forEach((input) => {
             input.addEventListener('input', (evt) => {
                 this._checkInputValidity(this._popupForm.querySelector(this._inputSelector), evt.target);
-                this._toggleButtonState(this._popupForm.querySelector(this._inputSelector), buttonElement);
+                this._toggleButtonState(this._popupForm.querySelector(this._inputSelector), this._buttonElement);
             });
         });
     
-        this._toggleButtonState(this._popupForm.querySelector(this._inputSelector), buttonElement);
+        this._toggleButtonState(this._popupForm.querySelector(this._inputSelector), this._buttonElement);
     };
 
 
     enableValidation () {
-       
         this._popupForm.addEventListener('submit', (evt) => {
                 evt.preventDefault();
         });
     
         this._setEventListeners();
     };
+
+   clearFormInput (popupForm, input) {
+       this._hideError (this._popupForm.querySelector(this._inputSelector), input);
+    };
     
+    disableButton () {
+        this._buttonElement.classList.add(this._inactiveButtonClass);
+        this._buttonElement.disabled = true;
+   };
 };
