@@ -31,7 +31,6 @@ editForm.enableValidation (openEditProfileButton);
 
 const addForm = new FormValidator (validationParams, popupAddCard);
 addForm.enableValidation (openAddCardPopupButton);
-addForm.disableButton (buttonSavePopupAdd);
 
 const renderCard = (data) => {
     const newCard = new Card (data, 
