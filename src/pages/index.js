@@ -66,8 +66,7 @@ const newAddCardPopupForm = new PopupWithForm ({
 newAddCardPopupForm.setEventListeners();
 
 openAddCardPopupButton.addEventListener('click', () => {
-    addForm.clearFormInput (popupAddCard, titleInput); 
-    addForm.clearFormInput (popupAddCard, linkInput); 
+    addForm.clearFormInputs (popupAddCard, [titleInput, linkInput]);  
     addForm.disableButton (buttonSavePopupAdd);
     newAddCardPopupForm.open(); 
 });
@@ -76,7 +75,7 @@ const newUserInfo = new UserInfo (profile, description);
 
 const newEditProfilePopupForm = new PopupWithForm ({
     popupSelector: popupEdit,               
-    handleFormSubmit: (data) => {            
+    handleFormSubmit: (data) => {         
         if (popupEdit.classList.contains('popup_opened')) { 
            newUserInfo.setUserInfo (data); 
            newEditProfilePopupForm.close(); 
@@ -87,8 +86,9 @@ const newEditProfilePopupForm = new PopupWithForm ({
 newEditProfilePopupForm.setEventListeners();
 
 openEditProfileButton.addEventListener('click', () => {
-    newUserInfo.getUserInfo (); 
-    editForm.clearFormInput (popupEditProfile, nameInput); 
-    editForm.clearFormInput (popupEditProfile, jobInput);   
+    editForm.clearFormInputs (popupEditProfile, [nameInput, jobInput]);
+    const newUser = newUserInfo.getUserInfo ();  
+    nameInput.value = newUser.name;
+    jobInput.value = newUser.about; 
     newEditProfilePopupForm.open(); 
 });

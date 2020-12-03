@@ -5,6 +5,8 @@ export class PopupWithForm extends Popup {
         super(popupSelector);
         this._handleFormSubmit = handleFormSubmit;
         this._element = this._popup.querySelector('.popup__container');
+        this._name = this._element.querySelector('.popup__field[name="name"]');
+        this._about = this._element.querySelector('.popup__field[name="about"]'); 
     };
   
     setEventListeners() {
@@ -31,6 +33,3 @@ export class PopupWithForm extends Popup {
         delete this._formValues;
     };
 };
-
-  
-  

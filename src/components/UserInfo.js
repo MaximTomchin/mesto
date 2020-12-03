@@ -7,16 +7,14 @@ export class UserInfo {
     };
 
     getUserInfo () {
-        this._userInfoList = [
-            this._name.value = this._userName.textContent,
-            this._about.value = this._userAbout.textContent
-        ];
-        return this._userInfoList;
+        return {
+            name: this._userName.textContent,
+            about: this._userAbout.textContent,
+        }
     };
-
-    setUserInfo () {
-       this._userName.textContent  = this._name.value;
-       this._userAbout.textContent  = this._about.value; 
-    };
+          
+    setUserInfo () {     
+        this._userName.textContent  = this._name.value; 
+        this._userAbout.textContent  = this._about.value;  
+     }; 
 };
-

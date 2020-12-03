@@ -31,6 +31,5 @@ export default class Popup {
         this._overlay.addEventListener('click', () => { 
             this.close(this._popup)
         });
-    };
-    
+    }; 
 };
