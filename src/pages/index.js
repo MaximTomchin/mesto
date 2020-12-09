@@ -2,6 +2,7 @@ import './index.css';
 import {Api} from '../components/api.js'
 import {PopupWithForm} from '../components/PopupWithForm.js'
 import {PopupWithImage} from '../components/PopupWithImage.js'
+import {PopupWithSubmit} from '../components/PopupWithSubmit.js'
 import {Card} from '../components/Card.js'
 import {
     openEditProfileButton,
@@ -17,7 +18,9 @@ import {
     profile,
     description,
     container,
+    avatar,
     popupImage,
+    popupResetCard,
     itemTemplateSelector,
     buttonSavePopupAdd, 
     validationParams} 
@@ -33,32 +36,54 @@ const api = new Api ({
        "Content-Type": "application/json"
     } 
 });
-
-const userInformation = api.getUserInfo ();
     
 const initialCards = api.getInitialCards ();
+console.log (initialCards);
 
-initialCards.then ((data) => {
-    CardList.renderItems(
-        data.map((item) => ({ name: item.name, link: item.link }))
-    );       
-})
-.catch((err) => alert(err));
+api.getUserInfo()
+    .then((data) => {
+        profile.textContent = data.name;
+        profile.id = data._id;
+        description.textContent = data.about;
+        avatar.src = data.avatar;
+    })  
+
+initialCards.then((data) => {
+             return data.reverse();
+            })
+            .then ((data) => {
+                CardList.renderItems(
+                    data.map((item) => ({ name: item.name, link: item.link, owner: item.owner, id: item._id }))
+                );       
+            })
+            .catch((err) => alert(err));
 
 const CardList = new Section ({
     renderer: (data) => renderCard (data)},
     container);
 
+const newPopupWithSubmit = new PopupWithSubmit(popupResetCard, {handleSubmitButton: () => console.log (renderCard())});
+newPopupWithSubmit.setEventListeners()
 
 const renderCard = (data) => {
     const newCard = new Card (data, 
        itemTemplateSelector, 
-        {handleCardClick: () => renderBigImage (data)});
+        {handleCardClick: () => renderBigImage (data)},
+        {handleDeleteIconClick: (id) => {
+            newPopupWithSubmit.setSubmitAction (() => {
+                api.deleteCard(id)
+                   .then (res => newCard.deleteCard())
+                   .catch((err) => console.log(err));
+            });
+            newPopupWithSubmit.open();
+            }
+        });
     const cardElement = newCard.generateCard();
     CardList.addItem(cardElement);
 };
 
-const newPopupWithImage = new PopupWithImage(popupImage);
+const newPopupWithImage = new PopupWithImage(popupImage)
+   
 newPopupWithImage.setEventListeners(); 
 
 
@@ -69,8 +94,7 @@ const renderBigImage = (evt) => {
 const newAddCardPopupForm = new PopupWithForm (
    {popup: popupAdd,               
     handleFormSubmit: (formData) => {
-        console.log (api);
-        api.addCard(formData)
+        api.addСard(formData)
         .then((formData) => {
             renderCard(formData);
         })
@@ -93,7 +117,11 @@ const newEditProfilePopupForm = new PopupWithForm (
     {popup: popupEdit,               
     handleFormSubmit: (data) => {         
         if (popupEdit.classList.contains('popup_opened')) { 
-           newUserInfo.setUserInfo (data); 
+            api.addUserInfo(data)
+            .then((data) => {
+            newUserInfo.setUserInfo (data); 
+        })
+        .catch((err) => console.log(err));
            newEditProfilePopupForm.close(); 
         };                      
      }

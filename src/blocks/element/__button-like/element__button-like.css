@@ -1,7 +1,11 @@
 .element__button-like {
-    width: 20.76px;
+    margin: 0;
+    padding: 0;
+    width: 20px;
+    height: 18px;
     background-color: #ffffff;
     background-image: url(../../../images/like.svg);
+    box-sizing: border-box;
     background-position: center;
     background-repeat: no-repeat;
     border: none;

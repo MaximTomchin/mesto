@@ -5,13 +5,13 @@ export class Api {
     }
 
     getInitialCards () {
-      return fetch (`${this._url}${'cards'}`, {
-        method: "GET",
-        headers: this._headers
-      })
-      .then((res) => {
-        if (res.ok) {
-            return res.json();
+        return fetch (`${this._url}${'cards'}`, {
+            method: "GET",
+            headers: this._headers
+        })
+        .then((res) => {
+            if (res.ok) {
+                return res.json();
         }
         return Promise.reject("Произошла ошибка");
        })
@@ -21,28 +21,53 @@ export class Api {
         return fetch(`${this._url}${'users/me'}`, {
             method: "GET",
             headers: this._headers
-          })
-          .then((res) => {
+        })
+        .then((res) => {
             if (res.ok) {
                 return res.json();
             }
             return Promise.reject("Произошла ошибка");
-           }) 
+        }) 
     }
 
-
-   addСard(data) {
-    return fetch (`${this._url}${'cards'}`, {
-          method: "POST",
-          headers: this._headers,
-          body: JSON.stringify(data)
+    addСard (data) {
+        return fetch (`${this._url}${'cards'}`, {
+            method: "POST",
+            headers: this._headers,
+            body: JSON.stringify(data)
         })
-    .then((res) => {
-        if (res.ok) {
-            return res.json();
+        .then((res) => {
+            if (res.ok) {
+                return res.json();
         }
         return Promise.reject("Произошла ошибка");
-    }) 
-}
+        }) 
+    }
 
+    deleteCard(id) {
+        return fetch(`${this._url}${'cards/'}${id}`, {
+            method: "DELETE",
+            headers: this._headers,
+        }).then((res) => {
+            if (res.ok) {
+                return res.json();
+            }
+    
+            return Promise.reject("Произошла ошибка");
+        });
+    }
+
+    addUserInfo (data) {
+        return fetch(`${this._url}${'users/me'}`, {
+            method: "PATCH",
+            headers: this._headers,
+            body: JSON.stringify(data)
+        })
+        .then((res) => {
+            if (res.ok) {
+                return res.json();
+        }
+        return Promise.reject("Произошла ошибка");
+        }) 
+    }
 } 
