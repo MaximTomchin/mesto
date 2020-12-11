@@ -2,8 +2,6 @@ export class UserInfo {
     constructor(UserName, UserAbout) {
         this._userName = UserName;
         this._userAbout = UserAbout;
-        this._name = document.querySelector('.popup__field[name="name"]');
-        this._about = document.querySelector('.popup__field[name="about"]');
     };
 
     getUserInfo () {
@@ -13,8 +11,8 @@ export class UserInfo {
         }
     };
           
-    setUserInfo () {     
-        this._userName.textContent  = this._name.value; 
-        this._userAbout.textContent  = this._about.value;  
-     }; 
+    setUserInfo (data) {     
+        this._userName.textContent  = data.name; 
+        this._userAbout.textContent  = data.about;  
+    }; 
 };

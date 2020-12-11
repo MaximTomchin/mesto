@@ -3,8 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Место</title>
-        
+        <title>Место</title>   
     </head>
 
     <body class="root">
@@ -17,11 +16,14 @@
             <main class="content">
                 <section class="profile">
                     <figure class="profile__box">
-                       <img src="<%=require('./images/kusto.jpg')%>" class="profile__avatar" alt="Фотопортрет Жака-Ива Кусто">
+                       <figure class = "profile__avatar-box">
+                            <img src="" class="profile__avatar" alt="Фотопортрет">
+                            <batton class="profile__change-avatar-button" type="button" aria-label="Edit"></batton>
+                        </figure>
                        <div class="profile__info">
                            <div class="profile__text-block">
-                              <h1 class="profile__name">Жак-Ив Кусто</h1>
-                              <p class="profile__description">Исследователь океана</p>
+                              <h1 class="profile__name" id=""></h1>
+                              <p class="profile__description"></p>
                            </div>                    
                           <button class="profile__edit-button" type="button" aria-label="Edit"></button>
                         </div>
@@ -45,11 +47,11 @@
                 <form class="popup__container popup__container_type_edit" name="edit-profile">
                     <button class= "popup__close-button" type="reset" aria-label="Close"></button>
                     <h2 class="popup__title">Редактировать профиль</h2>
-                    <input class="popup__field" id="user-name" type="text" name="name" value="Жак-Ив Кусто" placeholder="Имя" minlength="2" maxlength="40" required>
+                    <input class="popup__field" id="user-name" type="text" name="name" value="Имя" placeholder="Имя" minlength="2" maxlength="40" required>
                     <span id="user-name-error" class="error error_type_name"></span>
-                    <input class="popup__field" id="about" type="text" name="about" value="Исследователь океана" placeholder="Описание" minlength="2" maxlength="200" required>
+                    <input class="popup__field" id="about" type="text" name="about" value="Описание" placeholder="Описание" minlength="2" maxlength="200" required>
                     <span id="about-error" class="error error_type_about"></span>
-                    <button class="popup__button">Сохранить</button>                                    
+                    <button class="popup__button popup__button_type_edit">Сохранить</button>                                    
                 </form>
             </div>
 
@@ -58,9 +60,9 @@
                 <form class="popup__container popup__container_type_add" name="add-card">
                     <button class= "popup__close-button popup__close-button_type_add" type="reset" aria-label="Close"></button>
                     <h2 class="popup__title popup__title_type_add">Новое место</h2>
-                    <input required class="popup__field popup__field_type_add" id="name-card" type="text" name="title" value="" placeholder="Название" minlength="2" maxlength="30">
+                    <input class="popup__field popup__field_type_add" id="name-card" type="text" name="name" value="" placeholder="Название" minlength="2" maxlength="30">
                     <span id="name-card-error" class="error error_type_title"></span>
-                    <input required class="popup__field popup__field_type_add" id="link" type="url" name="link" value="" placeholder="Ссылка на картинку">
+                    <input class="popup__field popup__field_type_add" id="link" type="url" name="link" value="" placeholder="Ссылка на картинку" minlength="4" maxlength="200">
                     <span id="link-error" class="error error_type_link"></span>
                     <button class="popup__button popup__button_type_add">Создать</button>                                    
                 </form>
@@ -74,6 +76,26 @@
                     <p class="popup__caption"></p>
                 </figure>
             </div> 
+
+            <div class="popup popup_type_delete-card">
+                <div class="popup__overlay"></div>
+                <form class="popup__container popup__container_type_delete-card" name="delete-card">
+                    <button class= "popup__close-button popup__close-button_type_delete-card" type="reset" aria-label="Close"></button>
+                    <h2 class="popup__title popup__title_type_delete-card">Вы уверены?</h2>
+                    <button class="popup__button popup__button_type_delete-card">Да</button>                                    
+                </form>
+            </div> 
+
+            <div class="popup popup_type_change-avatar">
+                <div class="popup__overlay"></div>
+                <form class="popup__container popup__container_type_change-avatar" name="change-avatar">
+                    <button class= "popup__close-button popup__close-button_type_change-avatar" type="reset" aria-label="Close"></button>
+                    <h2 class="popup__title popup__title_type_change-avatar">Обновить аватар</h2>
+                    <input class="popup__field popup__field_type_change-avatar" id="avatar" type="url" name="avatar" value="" placeholder="Ссылка на картинку" minlength="4" maxlength="200">
+                    <span id="avatar-error" class="error error_type_avatar"></span>
+                    <button class="popup__button popup__button_type_change-avatar">Сохранить</button>                                    
+                </form>
+            </div> 
         </div> 
         
         
@@ -82,8 +104,11 @@
                 <button class="element__button-reset" type="reset" aria-label="Delete"></button>
                <div class="element__image-box"><img src="" class="element__image" alt=""></div>
                 <div class="element__info">
-                   <h2 class="element__title"></h2>
-                    <button class="element__button-like" type="button" aria-label="Like"></button>
+                    <h2 class="element__title"></h2>
+                    <div class ="element__like-block">
+                        <button class="element__button-like" type="button" aria-label="Like"></button>
+                        <p class="element__number-of-likes">0</p>
+                    </div>
                 </div>
             </figure>
         </template>
