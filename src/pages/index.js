@@ -27,8 +27,6 @@ import {
     popupResetCard,
     itemTemplateSelector,
     buttonSavePopupAdd, 
-    buttonSavePopupEdit,
-    buttonSavePopupChangeAvatar,
     validationParams} 
 from '../utils/constans.js'
 import {FormValidator} from '../components/Validate.js'
@@ -57,9 +55,10 @@ const newAddCardPopupForm = new PopupWithForm (
     {popup: popupAdd,               
     handleFormSubmit: (formData) => {
         newAddCardPopupForm.renderLoading(true);
-        api.addСard(formData)
+        api.addCard(formData)
         .then((formData) => {
             renderCard(formData);
+            newAddCardPopupForm.close();
         })
         .catch((err) => console.log(err))
         .finally(() => {
@@ -74,7 +73,8 @@ const newEditProfilePopupForm = new PopupWithForm (
         newEditProfilePopupForm.renderLoading(true); 
         api.addUserInfo(data)
             .then((data) => { 
-                newUserInfo.setUserInfo (data);})
+                newUserInfo.setUserInfo (data);
+                newEditProfilePopupForm.close()})
             .catch((err) => console.log(err)) 
             .finally(() => {
                 newEditProfilePopupForm.renderLoading(false);
@@ -88,7 +88,8 @@ const newChangeAvatarForm = new PopupWithForm ({
         newChangeAvatarForm.renderLoading(true);
         api.addAvatar(data)
             .then((data) => {
-                avatar.src = data.avatar})
+                avatar.src = data.avatar;
+                newChangeAvatarForm.close()})
             .catch((err) => console.log(err))
             .finally(() => {
                 newChangeAvatarForm.renderLoading(false)
@@ -102,11 +103,12 @@ const addForm = new FormValidator (validationParams, popupAddCard);
 
 const changeAvatarForm = new FormValidator (validationParams, popupChangeAvatar);
 
+let profileId = "null";
+profileId = profile._id;
+
 api.getAllNeededData().then(argument => {
     const [ dataFromFirstPromise, dataFromSecondPromise ] = argument
-        profile.textContent = dataFromFirstPromise.name
-        profile._id = dataFromFirstPromise._id
-        description.textContent = dataFromFirstPromise.about
+        newUserInfo.setUserInfo ({name: dataFromFirstPromise.name, about: dataFromFirstPromise.about, _id: dataFromFirstPromise._id})
         avatar.src = dataFromFirstPromise.avatar
         const initialCards = dataFromSecondPromise.reverse()
         CardList.renderItems(
@@ -166,23 +168,23 @@ newEditProfilePopupForm.setEventListeners();
 newChangeAvatarForm.setEventListeners();
 
 openAddCardPopupButton.addEventListener('click', () => {
-    addForm.clearFormInputs (popupAddCard, [titleInput, linkInput]);  
+    addForm.clearFormInputs ([titleInput, linkInput]);  
     addForm.disableButton (buttonSavePopupAdd);
     newAddCardPopupForm.open(); 
 });
 
 openEditProfileButton.addEventListener('click', () => {
-    editForm.clearFormInputs (popupEditProfile, [nameInput, jobInput]);
+    editForm.clearFormInputs ([nameInput, jobInput]);
     const newUser = newUserInfo.getUserInfo ();  
-    editForm.enableButton (buttonSavePopupEdit, {nameInput, jobInput});
+    editForm.toggleButtonState (popupEditProfile);
     nameInput.value = newUser.name;
     jobInput.value = newUser.about; 
     newEditProfilePopupForm.open(); 
 });
 
 openChangeAvatarPopupButton.addEventListener('click', () => {
-    changeAvatarForm.clearFormInputs (popupChangeAvatar, [avatarInput]); 
-    changeAvatarForm.enableButton (buttonSavePopupChangeAvatar, avatarInput);
+    changeAvatarForm.clearFormInputs (avatarInput);
+    changeAvatarForm.toggleButtonState (popupChangeAvatar); 
     avatarInput.value = avatar.src;
     newChangeAvatarForm.open(); 
 });

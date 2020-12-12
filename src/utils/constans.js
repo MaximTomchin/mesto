@@ -33,5 +33,3 @@ export const popupImage = document.querySelector('.popup_type_image');
 export const popupResetCard = document.querySelector('.popup_type_delete-card');
 export const itemTemplateSelector = '#card-template';
 export const buttonSavePopupAdd = document.querySelector('.popup__button_type_add');
-export const buttonSavePopupEdit = document.querySelector('.popup__button_type_edit');
-export const buttonSavePopupChangeAvatar = document.querySelector('.popup__button_type_change-avatar');

@@ -1,5 +1,3 @@
-import {profile} from '../utils/constans.js'
-
 export class Card {
     constructor(data, cardSelector, { handleCardClick }, { handleDeleteIconClick }, {handleLikeClick}) {
         this._title = data.name;
@@ -11,7 +9,7 @@ export class Card {
         this._handleCardClick = handleCardClick;
         this._handleDeleteIconClick = handleDeleteIconClick;
         this._handleLikeClick = handleLikeClick;
-        this._userId = profile._id;
+        this._userId = document.querySelector('.profile__name')._id;
         this._content = this._getTemplate();
         this._image = this._content.querySelector('.element__image');
         this._buttonLike = this._content.querySelector('.element__button-like');

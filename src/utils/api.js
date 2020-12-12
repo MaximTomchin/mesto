@@ -34,7 +34,7 @@ export class Api {
         return Promise.all([this.getUserInfo(),this.getInitialCards()])
     }
 
-    addСard (data) {
+    addCard (data) {
         return fetch (`${this._url}${'cards'}`, {
             method: "POST",
             headers: this._headers,
