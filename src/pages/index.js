@@ -1,5 +1,5 @@
 import './index.css';
-import {Api} from '../components/api.js'
+import {Api} from '../utils/api.js'
 import {PopupWithForm} from '../components/PopupWithForm.js'
 import {PopupWithImage} from '../components/PopupWithImage.js'
 import {PopupWithSubmit} from '../components/PopupWithSubmit.js'
@@ -35,12 +35,6 @@ import {FormValidator} from '../components/Validate.js'
 import {Section} from '../components/Section.js'
 import {UserInfo} from '../components/UserInfo.js'
 
-const editForm = new FormValidator (validationParams, popupEditProfile);
-
-const addForm = new FormValidator (validationParams, popupAddCard);
-
-const changeAvatarForm = new FormValidator (validationParams, popupChangeAvatar);
-
 const api = new Api ({
     url: "https://mesto.nomoreparties.co/v1/cohort-18/",
     headers: {
@@ -48,8 +42,6 @@ const api = new Api ({
         "Content-Type": "application/json"
     } 
 });
-    
-const initialCards = api.getInitialCards ();
 
 const CardList = new Section ({
     renderer: (data) => renderCard (data)},
@@ -104,23 +96,25 @@ const newChangeAvatarForm = new PopupWithForm ({
     }
 });
 
-api.getUserInfo()
-    .then((data) => {
-        profile.textContent = data.name;
-        profile._id = data._id;
-        description.textContent = data.about;
-        avatar.src = data.avatar;
-    })  
+const editForm = new FormValidator (validationParams, popupEditProfile);
 
-initialCards.then((data) => {
-             return data.reverse();
-            })
-            .then ((data) => {
-                CardList.renderItems(
-                    data.map((item) => ({ name: item.name, link: item.link, owner: item.owner, _id: item._id, likes: item.likes }))
+const addForm = new FormValidator (validationParams, popupAddCard);
+
+const changeAvatarForm = new FormValidator (validationParams, popupChangeAvatar);
+
+api.getAllNeededData().then(argument => {
+    const [ dataFromFirstPromise, dataFromSecondPromise ] = argument
+        profile.textContent = dataFromFirstPromise.name
+        profile._id = dataFromFirstPromise._id
+        description.textContent = dataFromFirstPromise.about
+        avatar.src = dataFromFirstPromise.avatar
+        const initialCards = dataFromSecondPromise.reverse()
+        CardList.renderItems(
+                    initialCards.map((item) => ({ name: item.name, link: item.link, owner: item.owner, _id: item._id, likes: item.likes }))
                 );       
-            })
-            .catch((err) => alert(err));
+})
+.catch((err) => alert(err));
+
 
 const renderCard = (data) => {
     const newCard = new Card (data, 

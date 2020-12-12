@@ -30,6 +30,10 @@ export class Api {
         }) 
     }
 
+    getAllNeededData () {
+        return Promise.all([this.getUserInfo(),this.getInitialCards()])
+    }
+
     addСard (data) {
         return fetch (`${this._url}${'cards'}`, {
             method: "POST",
