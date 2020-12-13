@@ -1,5 +1,5 @@
 import './index.css';
-import {Api} from '../utils/api.js'
+import {Api} from '../components/api.js'
 import {PopupWithForm} from '../components/PopupWithForm.js'
 import {PopupWithImage} from '../components/PopupWithImage.js'
 import {PopupWithSubmit} from '../components/PopupWithSubmit.js'

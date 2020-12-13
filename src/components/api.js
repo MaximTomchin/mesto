@@ -4,17 +4,16 @@ export class Api {
         this._headers = config.headers;
     }
 
+    _checkResponse(res) {
+        return res.ok ? res.json() : Promise.reject("Произошла ошибка");
+    }
+
     getInitialCards () {
         return fetch (`${this._url}${'cards'}`, {
             method: "GET",
             headers: this._headers
         })
-        .then((res) => {
-            if (res.ok) {
-                return res.json();
-        }
-        return Promise.reject("Произошла ошибка");
-        })
+        .then(this._checkResponse);
     }
 
     getUserInfo () {
@@ -22,12 +21,7 @@ export class Api {
             method: "GET",
             headers: this._headers
         })
-        .then((res) => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject("Произошла ошибка");
-        }) 
+        .then(this._checkResponse);
     }
 
     getAllNeededData () {
@@ -40,24 +34,14 @@ export class Api {
             headers: this._headers,
             body: JSON.stringify(data)
         })
-        .then((res) => {
-            if (res.ok) {
-                return res.json();
-        }
-        return Promise.reject("Произошла ошибка");
-        }) 
+        .then(this._checkResponse);
     }
 
     deleteCard(id) {
         return fetch(`${this._url}${'cards/'}${id}`, {
             method: "DELETE",
             headers: this._headers,
-        }).then((res) => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject("Произошла ошибка");
-        });
+        }).then(this._checkResponse);
     }
 
     addUserInfo (data) {
@@ -66,12 +50,7 @@ export class Api {
             headers: this._headers,
             body: JSON.stringify(data)
         })
-        .then((res) => {
-            if (res.ok) {
-                return res.json();
-        }
-        return Promise.reject("Произошла ошибка");
-        }) 
+        .then(this._checkResponse);
     }
 
     addAvatar (data) {
@@ -80,35 +59,20 @@ export class Api {
             headers: this._headers,
             body: JSON.stringify(data)
         })
-        .then((res) => {
-            if (res.ok) {
-                return res.json();
-        }
-        return Promise.reject("Произошла ошибка");
-        }) 
+        .then(this._checkResponse);
     }
 
     likeCard(id) {
         return fetch(`${this._url}${'cards/likes/'}${id}`, {
             method: "PUT",
             headers: this._headers,
-        }).then((res) => {
-            if (res.ok) {
-                return res.json();
-            }
-        return Promise.reject("Произошла ошибка");
-        });
+        }).then(this._checkResponse);
     }
 
     removeLikeCard(id) {
         return fetch(`${this._url}${'cards/likes/'}${id}`, {
             method: "DELETE",
             headers: this._headers,
-        }).then((res) => {
-            if (res.ok) {
-                return res.json();
-            }
-        return Promise.reject("Произошла ошибка");
-        });
+        }).then(this._checkResponse);
     }
 } 
