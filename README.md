@@ -1,4 +1,4 @@
-# Проект 9: Место
+# Проект: Mesto
 [проект на GitHub pages](https://maximtomchin.github.io/mesto)
 
 ## О Проекте
